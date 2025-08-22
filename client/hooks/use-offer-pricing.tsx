@@ -96,7 +96,6 @@ export function OfferPricingProvider({ children }: { children: ReactNode }) {
         message: error?.message,
         stack: error?.stack
       });
-      logDatabaseError("offer pricing", error);
       console.info(
         "Using default offer pricing data due to database connection issue",
       );
