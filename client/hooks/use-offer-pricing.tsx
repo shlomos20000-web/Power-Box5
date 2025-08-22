@@ -83,7 +83,6 @@ export function OfferPricingProvider({ children }: { children: ReactNode }) {
             details: error.details,
             hint: error.hint
           });
-          logError("Error loading offer pricing data:", error);
         }
         return;
       }
