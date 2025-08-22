@@ -1,6 +1,7 @@
 # Database Setup Instructions
 
 ## Current Issue
+
 The frontend is experiencing database loading errors because the Supabase tables haven't been created yet. The errors you're seeing:
 
 - `Error loading offer pricing data: [object Object]`
@@ -23,6 +24,7 @@ These are happening because the application is trying to fetch data from databas
 ### 2. Verify Tables Were Created
 
 After running the SQL script, check that these tables exist:
+
 - `hero_section`
 - `customer_reviews`
 - `footer`
@@ -37,6 +39,7 @@ After running the SQL script, check that these tables exist:
 ### 3. Check the Frontend
 
 Once the tables are created:
+
 1. The errors should disappear
 2. The website should load with default content
 3. You can now edit content directly in Supabase and see it update in real-time
@@ -117,6 +120,7 @@ These will appear on your website and help you understand what's missing.
 ## Expected Result
 
 After setting up the database:
+
 - ✅ All error messages will disappear
 - ✅ Website loads with default content
 - ✅ Real-time updates work when you edit content in Supabase

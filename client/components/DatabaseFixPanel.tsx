@@ -84,7 +84,7 @@ SELECT 'SUCCESS: All tables created! Refresh your website.' as result;`;
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (e) {
-      console.error('Failed to copy SQL');
+      console.error("Failed to copy SQL");
     }
   };
 
@@ -94,7 +94,9 @@ SELECT 'SUCCESS: All tables created! Refresh your website.' as result;`;
         <Database className="h-4 w-4" />
         <AlertDescription>
           <div className="flex items-center justify-between mb-2">
-            <span className="font-semibold text-red-800">Database Setup Required</span>
+            <span className="font-semibold text-red-800">
+              Database Setup Required
+            </span>
             <Button
               variant="outline"
               size="sm"
@@ -106,12 +108,12 @@ SELECT 'SUCCESS: All tables created! Refresh your website.' as result;`;
           </div>
 
           <div className="text-red-700 text-sm space-y-3">
-            <div>
-              Your website needs database tables. Follow these steps:
-            </div>
+            <div>Your website needs database tables. Follow these steps:</div>
 
             <div className="bg-white rounded p-2 border">
-              <div className="font-medium text-xs mb-1">1. Copy SQL Script:</div>
+              <div className="font-medium text-xs mb-1">
+                1. Copy SQL Script:
+              </div>
               <Button
                 variant="outline"
                 size="sm"
@@ -119,7 +121,7 @@ SELECT 'SUCCESS: All tables created! Refresh your website.' as result;`;
                 className="w-full h-8"
               >
                 <Copy className="h-3 w-3 mr-1" />
-                {copied ? '✅ Copied!' : 'Copy SQL Script'}
+                {copied ? "✅ Copied!" : "Copy SQL Script"}
               </Button>
             </div>
 
@@ -128,7 +130,9 @@ SELECT 'SUCCESS: All tables created! Refresh your website.' as result;`;
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => window.open('https://supabase.com/dashboard', '_blank')}
+                onClick={() =>
+                  window.open("https://supabase.com/dashboard", "_blank")
+                }
                 className="w-full h-8"
               >
                 <ExternalLink className="h-3 w-3 mr-1" />
@@ -144,7 +148,8 @@ SELECT 'SUCCESS: All tables created! Refresh your website.' as result;`;
             </div>
 
             <div className="text-xs text-green-600 bg-green-50 p-2 rounded border">
-              ✅ After running: All errors will disappear and your site will work!
+              ✅ After running: All errors will disappear and your site will
+              work!
             </div>
           </div>
         </AlertDescription>

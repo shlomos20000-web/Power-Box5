@@ -18,26 +18,26 @@ export function DatabaseDebugger() {
   const [showDetails, setShowDetails] = useState(false);
 
   const requiredTables = [
-    'offer_pricing',
-    'customer_reviews', 
-    'footer',
-    'product_gallery',
-    'trust_section'
+    "offer_pricing",
+    "customer_reviews",
+    "footer",
+    "product_gallery",
+    "trust_section",
   ];
 
   const checkTables = async () => {
     setIsChecking(true);
     const checks: TableCheck[] = [];
 
-    console.log('🔍 Starting database table checks...');
+    console.log("🔍 Starting database table checks...");
 
     for (const tableName of requiredTables) {
       try {
         console.log(`Checking table: ${tableName}`);
-        
+
         const { data, error } = await supabase
           .from(tableName)
-          .select('*')
+          .select("*")
           .limit(1);
 
         if (error) {
@@ -48,13 +48,13 @@ export function DatabaseDebugger() {
             name: tableName,
             exists: false,
             error: errorMessage,
-            errorCode: error.code || 'unknown'
+            errorCode: error.code || "unknown",
           });
         } else {
           console.log(`✅ Table ${tableName} exists and is accessible`);
           checks.push({
             name: tableName,
-            exists: true
+            exists: true,
           });
         }
       } catch (e) {
@@ -63,7 +63,7 @@ export function DatabaseDebugger() {
         checks.push({
           name: tableName,
           exists: false,
-          error: errorMessage
+          error: errorMessage,
         });
       }
     }
@@ -76,7 +76,7 @@ export function DatabaseDebugger() {
     checkTables();
   }, []);
 
-  const missingTables = tableChecks.filter(check => !check.exists);
+  const missingTables = tableChecks.filter((check) => !check.exists);
   const allTablesExist = missingTables.length === 0;
 
   const quickFixSQL = `-- Quick fix for missing tables
@@ -147,7 +147,13 @@ CREATE POLICY "Enable read access for all users" ON trust_section FOR SELECT USI
 
   return (
     <div className="fixed top-4 right-4 z-50 max-w-md">
-      <Alert className={allTablesExist ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"}>
+      <Alert
+        className={
+          allTablesExist
+            ? "bg-green-50 border-green-200"
+            : "bg-red-50 border-red-200"
+        }
+      >
         <AlertTriangle className="h-4 w-4" />
         <AlertDescription>
           <div className="flex items-center justify-between mb-2">
@@ -159,15 +165,17 @@ CREATE POLICY "Enable read access for all users" ON trust_section FOR SELECT USI
               size="sm"
               onClick={() => setShowDetails(!showDetails)}
             >
-              {showDetails ? 'Hide' : 'Show'}
+              {showDetails ? "Hide" : "Show"}
             </Button>
           </div>
 
           {!allTablesExist && (
             <div className="text-red-700 mb-3">
-              <div className="font-medium">Missing {missingTables.length} table(s):</div>
+              <div className="font-medium">
+                Missing {missingTables.length} table(s):
+              </div>
               <div className="text-sm">
-                {missingTables.map(table => table.name).join(', ')}
+                {missingTables.map((table) => table.name).join(", ")}
               </div>
             </div>
           )}
@@ -184,7 +192,7 @@ CREATE POLICY "Enable read access for all users" ON trust_section FOR SELECT USI
                   <span className="font-mono text-xs">{check.name}</span>
                   {check.error && (
                     <span className="text-xs text-red-600">
-                      ({check.errorCode || 'error'})
+                      ({check.errorCode || "error"})
                     </span>
                   )}
                 </div>
@@ -202,7 +210,7 @@ CREATE POLICY "Enable read access for all users" ON trust_section FOR SELECT USI
                     Copy Quick Fix SQL
                   </Button>
                 )}
-                
+
                 <Button
                   variant="outline"
                   size="sm"
@@ -210,7 +218,7 @@ CREATE POLICY "Enable read access for all users" ON trust_section FOR SELECT USI
                   disabled={isChecking}
                   className="w-full"
                 >
-                  {isChecking ? 'Checking...' : 'Refresh'}
+                  {isChecking ? "Checking..." : "Refresh"}
                 </Button>
               </div>
             </div>

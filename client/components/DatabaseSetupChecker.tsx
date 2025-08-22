@@ -17,16 +17,16 @@ export function DatabaseSetupChecker() {
   const [showDetails, setShowDetails] = useState(false);
 
   const tables = [
-    'seo_settings',
-    'hero_section',
-    'customer_reviews',
-    'footer',
-    'offer_pricing',
-    'product_gallery',
-    'trust_section',
-    'why_choose_section',
-    'product_popup',
-    'exit_intent_popup'
+    "seo_settings",
+    "hero_section",
+    "customer_reviews",
+    "footer",
+    "offer_pricing",
+    "product_gallery",
+    "trust_section",
+    "why_choose_section",
+    "product_popup",
+    "exit_intent_popup",
   ];
 
   const checkTables = async () => {
@@ -37,30 +37,30 @@ export function DatabaseSetupChecker() {
       try {
         const { data, error } = await supabase
           .from(tableName)
-          .select('*')
+          .select("*")
           .limit(1);
 
         if (error) {
-          if (error.code === 'PGRST116' || error.code === '42P01') {
+          if (error.code === "PGRST116" || error.code === "42P01") {
             statuses.push({
               name: tableName,
               exists: false,
               hasData: false,
-              error: 'Table does not exist'
+              error: "Table does not exist",
             });
           } else {
             statuses.push({
               name: tableName,
               exists: true,
               hasData: false,
-              error: `Error: ${error.message} (Code: ${error.code})`
+              error: `Error: ${error.message} (Code: ${error.code})`,
             });
           }
         } else {
           statuses.push({
             name: tableName,
             exists: true,
-            hasData: data && data.length > 0
+            hasData: data && data.length > 0,
           });
         }
       } catch (e) {
@@ -68,7 +68,7 @@ export function DatabaseSetupChecker() {
           name: tableName,
           exists: false,
           hasData: false,
-          error: `Exception: ${e instanceof Error ? e.message : 'Unknown error'}`
+          error: `Exception: ${e instanceof Error ? e.message : "Unknown error"}`,
         });
       }
     }
@@ -81,8 +81,8 @@ export function DatabaseSetupChecker() {
     checkTables();
   }, []);
 
-  const allTablesExist = tableStatuses.every(status => status.exists);
-  const allTablesHaveData = tableStatuses.every(status => status.hasData);
+  const allTablesExist = tableStatuses.every((status) => status.exists);
+  const allTablesHaveData = tableStatuses.every((status) => status.hasData);
 
   if (!showDetails && allTablesExist && allTablesHaveData) {
     return null; // Hide if everything is working
@@ -100,13 +100,14 @@ export function DatabaseSetupChecker() {
               size="sm"
               onClick={() => setShowDetails(!showDetails)}
             >
-              {showDetails ? 'Hide' : 'Show'} Details
+              {showDetails ? "Hide" : "Show"} Details
             </Button>
           </div>
 
           {!allTablesExist && (
             <div className="text-amber-700 mb-2">
-              ⚠️ Some database tables are missing. Please run the SQL setup script.
+              ⚠️ Some database tables are missing. Please run the SQL setup
+              script.
             </div>
           )}
 
@@ -125,11 +126,13 @@ export function DatabaseSetupChecker() {
                   )}
                   <span className="text-xs font-mono">{status.name}</span>
                   {status.error && (
-                    <span className="text-xs text-red-600">({status.error})</span>
+                    <span className="text-xs text-red-600">
+                      ({status.error})
+                    </span>
                   )}
                 </div>
               ))}
-              
+
               <div className="mt-3 pt-2 border-t border-yellow-200">
                 <Button
                   variant="outline"
@@ -138,7 +141,7 @@ export function DatabaseSetupChecker() {
                   disabled={isChecking}
                   className="w-full"
                 >
-                  {isChecking ? 'Checking...' : 'Refresh Status'}
+                  {isChecking ? "Checking..." : "Refresh Status"}
                 </Button>
               </div>
             </div>

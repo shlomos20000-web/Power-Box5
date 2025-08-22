@@ -5,34 +5,36 @@ import { Button } from "@/components/ui/button";
 import { Copy, Database, RefreshCw } from "lucide-react";
 
 export function SupabaseConnectionTest() {
-  const [connectionStatus, setConnectionStatus] = useState<'testing' | 'connected' | 'failed'>('testing');
+  const [connectionStatus, setConnectionStatus] = useState<
+    "testing" | "connected" | "failed"
+  >("testing");
   const [errorDetails, setErrorDetails] = useState<any>(null);
   const [showTest, setShowTest] = useState(false);
 
   const testConnection = async () => {
-    setConnectionStatus('testing');
+    setConnectionStatus("testing");
     setErrorDetails(null);
 
     try {
       // Try a simple query that should work even without tables
       const { data, error } = await supabase
-        .from('hero_section')
-        .select('count', { count: 'exact', head: true });
+        .from("hero_section")
+        .select("count", { count: "exact", head: true });
 
       if (error) {
-        if (error.code === 'PGRST116' || error.code === '42P01') {
+        if (error.code === "PGRST116" || error.code === "42P01") {
           // Table doesn't exist, but connection works
-          setConnectionStatus('connected');
+          setConnectionStatus("connected");
         } else {
           // Real connection error
-          setConnectionStatus('failed');
+          setConnectionStatus("failed");
           setErrorDetails(error);
         }
       } else {
-        setConnectionStatus('connected');
+        setConnectionStatus("connected");
       }
     } catch (e) {
-      setConnectionStatus('failed');
+      setConnectionStatus("failed");
       setErrorDetails(e);
     }
   };
@@ -130,7 +132,7 @@ INSERT INTO hero_section (content) VALUES ('{
     navigator.clipboard.writeText(sqlScript);
   };
 
-  if (!showTest && connectionStatus === 'connected') {
+  if (!showTest && connectionStatus === "connected") {
     return (
       <div className="fixed bottom-4 right-4 z-50">
         <Button
@@ -148,29 +150,36 @@ INSERT INTO hero_section (content) VALUES ('{
 
   return (
     <div className="fixed top-4 left-4 z-50 max-w-lg">
-      <Alert className={
-        connectionStatus === 'connected' ? 'bg-green-50 border-green-200' :
-        connectionStatus === 'failed' ? 'bg-red-50 border-red-200' :
-        'bg-yellow-50 border-yellow-200'
-      }>
+      <Alert
+        className={
+          connectionStatus === "connected"
+            ? "bg-green-50 border-green-200"
+            : connectionStatus === "failed"
+              ? "bg-red-50 border-red-200"
+              : "bg-yellow-50 border-yellow-200"
+        }
+      >
         <Database className="h-4 w-4" />
         <AlertDescription>
           <div className="flex items-center justify-between mb-2">
             <span className="font-semibold">
-              Supabase Connection: {
-                connectionStatus === 'connected' ? '✅ Connected' :
-                connectionStatus === 'failed' ? '❌ Failed' :
-                '⏳ Testing...'
-              }
+              Supabase Connection:{" "}
+              {connectionStatus === "connected"
+                ? "✅ Connected"
+                : connectionStatus === "failed"
+                  ? "❌ Failed"
+                  : "⏳ Testing..."}
             </span>
             <div className="flex gap-1">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={testConnection}
-                disabled={connectionStatus === 'testing'}
+                disabled={connectionStatus === "testing"}
               >
-                <RefreshCw className={`h-3 w-3 ${connectionStatus === 'testing' ? 'animate-spin' : ''}`} />
+                <RefreshCw
+                  className={`h-3 w-3 ${connectionStatus === "testing" ? "animate-spin" : ""}`}
+                />
               </Button>
               <Button
                 variant="outline"
@@ -182,10 +191,11 @@ INSERT INTO hero_section (content) VALUES ('{
             </div>
           </div>
 
-          {connectionStatus === 'failed' && errorDetails && (
+          {connectionStatus === "failed" && errorDetails && (
             <div className="text-red-700 text-sm space-y-2">
               <div>
-                <strong>Error:</strong> {errorDetails.message || 'Unknown error'}
+                <strong>Error:</strong>{" "}
+                {errorDetails.message || "Unknown error"}
               </div>
               {errorDetails.code && (
                 <div>
@@ -209,10 +219,13 @@ INSERT INTO hero_section (content) VALUES ('{
             </div>
           )}
 
-          {connectionStatus === 'connected' && (
+          {connectionStatus === "connected" && (
             <div className="text-green-700 text-sm space-y-2">
               <div>✅ Supabase connection is working!</div>
-              <div>If you're seeing data loading errors, you may need to create the database tables.</div>
+              <div>
+                If you're seeing data loading errors, you may need to create the
+                database tables.
+              </div>
               <Button
                 variant="outline"
                 size="sm"
