@@ -71,6 +71,12 @@ export function TrustProvider({ children }: { children: ReactNode }) {
         if (error.code === "PGRST116" || error.code === "42P01") {
           console.info("Trust section table not found, using default data");
         } else {
+          console.error("Error loading trust data:", {
+            message: error.message,
+            code: error.code,
+            details: error.details,
+            hint: error.hint
+          });
           logError("Error loading trust data:", error);
         }
         return;
