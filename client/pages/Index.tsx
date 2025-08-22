@@ -109,8 +109,8 @@ export default function Index() {
 
   return (
     <>
-      {/* Database Debugger - shows table status and provides quick fix */}
-      <DatabaseDebugger />
+      {/* Database Fix Panel - provides clear instructions to fix database errors */}
+      <DatabaseFixPanel />
 
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
         {/* Floating Snack Animations */}
