@@ -6,7 +6,7 @@ import {
   ReactNode,
 } from "react";
 import { supabase } from "@/lib/supabaseClient";
-import { logError } from "@/lib/error-utils";
+import { logDatabaseError } from "@/lib/error-handler";
 
 interface SellerInfo {
   name: string;
@@ -71,7 +71,7 @@ export function TrustProvider({ children }: { children: ReactNode }) {
         if (error.code === "PGRST116" || error.code === "42P01") {
           console.info("Trust section table not found, using default data");
         } else {
-          logError("Error loading trust data:", error);
+          logDatabaseError("Error loading trust data", error);
         }
         return;
       }
