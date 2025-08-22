@@ -6,7 +6,7 @@ import {
   ReactNode,
 } from "react";
 import { supabase } from "@/lib/supabaseClient";
-import { logError, logDatabaseError } from "@/lib/error-utils";
+import { logDatabaseError } from "@/lib/error-handler";
 
 interface TrustElement {
   icon: string;
@@ -77,12 +77,7 @@ export function OfferPricingProvider({ children }: { children: ReactNode }) {
         if (error.code === "PGRST116" || error.code === "42P01") {
           console.info("Offer pricing table not found, using default data");
         } else {
-          console.error("Error loading offer pricing data:", {
-            message: error.message,
-            code: error.code,
-            details: error.details,
-            hint: error.hint
-          });
+          logDatabaseError("Error loading offer pricing data", error);
         }
         return;
       }
@@ -91,11 +86,7 @@ export function OfferPricingProvider({ children }: { children: ReactNode }) {
         setOfferPricingData({ ...defaultOfferPricingData, ...data.content });
       }
     } catch (error) {
-      console.error("Catch block - offer pricing error:", {
-        name: error?.name,
-        message: error?.message,
-        stack: error?.stack
-      });
+      logDatabaseError("Catch block - offer pricing error", error);
       console.info(
         "Using default offer pricing data due to database connection issue",
       );
