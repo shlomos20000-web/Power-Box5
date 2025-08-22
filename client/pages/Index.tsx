@@ -113,6 +113,9 @@ export default function Index() {
       {/* Database Setup Checker - only shows if there are issues */}
       <DatabaseSetupChecker />
 
+      {/* Supabase Connection Test - for debugging */}
+      <SupabaseConnectionTest />
+
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
         {/* Floating Snack Animations */}
         <FloatingSnacks />
