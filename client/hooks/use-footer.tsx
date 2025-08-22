@@ -90,7 +90,6 @@ export function FooterProvider({ children }: { children: ReactNode }) {
         message: error?.message,
         stack: error?.stack
       });
-      logDatabaseError("footer", error);
       console.info(
         "Using default footer data due to database connection issue",
       );
