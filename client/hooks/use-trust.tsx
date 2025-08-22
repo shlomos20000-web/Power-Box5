@@ -77,7 +77,6 @@ export function TrustProvider({ children }: { children: ReactNode }) {
             details: error.details,
             hint: error.hint
           });
-          logError("Error loading trust data:", error);
         }
         return;
       }
