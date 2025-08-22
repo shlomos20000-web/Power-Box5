@@ -109,6 +109,9 @@ export default function Index() {
 
   return (
     <>
+      {/* Database Setup Checker - only shows if there are issues */}
+      <DatabaseSetupChecker />
+
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
         {/* Floating Snack Animations */}
         <FloatingSnacks />
