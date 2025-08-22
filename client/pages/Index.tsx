@@ -33,6 +33,7 @@ import { CustomerReviews } from "@/components/CustomerReviews";
 import { EnhancedExitIntentPopup } from "@/components/EnhancedExitIntentPopup";
 import { ProductPopup } from "@/components/ProductPopup";
 import { DatabaseSetupChecker } from "@/components/DatabaseSetupChecker";
+import { SupabaseConnectionTest } from "@/components/SupabaseConnectionTest";
 import { useExitIntent } from "@/hooks/use-exit-intent";
 
 export default function Index() {
