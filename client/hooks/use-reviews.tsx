@@ -95,7 +95,6 @@ export function ReviewsProvider({ children }: { children: ReactNode }) {
         message: error?.message,
         stack: error?.stack
       });
-      logDatabaseError("reviews", error);
       console.info(
         "Using default reviews data due to database connection issue",
       );
