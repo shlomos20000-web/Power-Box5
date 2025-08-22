@@ -72,7 +72,6 @@ export function ProductGalleryProvider({ children }: { children: ReactNode }) {
             details: error.details,
             hint: error.hint
           });
-          logError("Error loading product gallery data:", error);
         }
         return;
       }
