@@ -66,6 +66,12 @@ export function ProductGalleryProvider({ children }: { children: ReactNode }) {
         if (error.code === "PGRST116" || error.code === "42P01") {
           console.info("Product gallery table not found, using default data");
         } else {
+          console.error("Error loading product gallery data:", {
+            message: error.message,
+            code: error.code,
+            details: error.details,
+            hint: error.hint
+          });
           logError("Error loading product gallery data:", error);
         }
         return;
