@@ -76,6 +76,12 @@ export function ReviewsProvider({ children }: { children: ReactNode }) {
         if (error.code === "PGRST116" || error.code === "42P01") {
           console.info("Customer reviews table not found, using default data");
         } else {
+          console.error("Error loading reviews data:", {
+            message: error.message,
+            code: error.code,
+            details: error.details,
+            hint: error.hint
+          });
           logError("Error loading reviews data:", error);
         }
         return;
@@ -85,6 +91,11 @@ export function ReviewsProvider({ children }: { children: ReactNode }) {
         setReviewsData({ ...defaultReviewsData, ...data.content });
       }
     } catch (error) {
+      console.error("Catch block - reviews error:", {
+        name: error?.name,
+        message: error?.message,
+        stack: error?.stack
+      });
       logDatabaseError("reviews", error);
       console.info(
         "Using default reviews data due to database connection issue",
