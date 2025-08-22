@@ -71,6 +71,12 @@ export function FooterProvider({ children }: { children: ReactNode }) {
         if (error.code === "PGRST116" || error.code === "42P01") {
           console.info("Footer table not found, using default data");
         } else {
+          console.error("Error loading footer data:", {
+            message: error.message,
+            code: error.code,
+            details: error.details,
+            hint: error.hint
+          });
           logError("Error loading footer data:", error);
         }
         return;
@@ -80,6 +86,11 @@ export function FooterProvider({ children }: { children: ReactNode }) {
         setFooterData({ ...defaultFooterData, ...data.content });
       }
     } catch (error) {
+      console.error("Catch block - footer error:", {
+        name: error?.name,
+        message: error?.message,
+        stack: error?.stack
+      });
       logDatabaseError("footer", error);
       console.info(
         "Using default footer data due to database connection issue",
