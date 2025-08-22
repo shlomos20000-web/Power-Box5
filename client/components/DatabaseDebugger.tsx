@@ -58,11 +58,12 @@ export function DatabaseDebugger() {
           });
         }
       } catch (e) {
-        console.error(`Exception checking table ${tableName}:`, e);
+        const errorMessage = getErrorMessage(e);
+        console.error(`Exception checking table ${tableName}: ${errorMessage}`);
         checks.push({
           name: tableName,
           exists: false,
-          error: e instanceof Error ? e.message : 'Unknown error'
+          error: errorMessage
         });
       }
     }
