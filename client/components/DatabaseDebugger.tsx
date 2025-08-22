@@ -41,18 +41,14 @@ export function DatabaseDebugger() {
           .limit(1);
 
         if (error) {
-          console.error(`Error for table ${tableName}:`, {
-            message: error.message,
-            code: error.code,
-            details: error.details,
-            hint: error.hint
-          });
+          const errorMessage = getErrorMessage(error);
+          console.error(`Error for table ${tableName}: ${errorMessage}`);
 
           checks.push({
             name: tableName,
             exists: false,
-            error: error.message,
-            errorCode: error.code
+            error: errorMessage,
+            errorCode: error.code || 'unknown'
           });
         } else {
           console.log(`✅ Table ${tableName} exists and is accessible`);
