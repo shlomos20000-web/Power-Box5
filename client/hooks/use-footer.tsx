@@ -77,7 +77,6 @@ export function FooterProvider({ children }: { children: ReactNode }) {
             details: error.details,
             hint: error.hint
           });
-          logError("Error loading footer data:", error);
         }
         return;
       }
